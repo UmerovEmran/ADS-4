@@ -1,3 +1,4 @@
+// Copyright 2021 NNTU-CS
 int sch;
 int countPairs1(int *arr, int len, int value) {
   int otvet;
@@ -50,7 +51,7 @@ int countPairs2(int *arr, int len, int value) {
   }
   return otvet;
 }
-int cbinsearch(int *arr, int size, int value);
+int cbinsearch(int *arr, int k, int value);
 int countPairs3(int *arr, int len, int value) {
   int porog;
   int otvet = 0;
@@ -71,25 +72,25 @@ int countPairs3(int *arr, int len, int value) {
   otvet = otvet / 2;
   return otvet;
 }
-int cbinsearch(int *arr, int size, int value) {
-  int irr[size];
-  for ( int i = 0; i  < size; i++ ) {
+int cbinsearch(int *arr, int k, int value) {
+  int irr[k];
+  for ( int i = 0; i  < k; i++ ) {
     irr[i] = arr[i];
   }
   bool cr;
   sch = 0;
   while (true) {
-    int last = size - 1;
+    int last = k - 1;
     int start = 0;
     cr = true;
     while (start < last) {
       int pol = (last - start) / 2 + start;
       if (irr[pol] == value) {
-        for ( int i = pol; i < size; i++ ) {
+        for ( int i = pol; i < k; i++ ) {
           irr[i] = irr[i + 1];
         }
         sch += 1;
-        size -= 1;
+        k -= 1;
         cr = false;
         break;
       } else if (irr[pol] > value) {
