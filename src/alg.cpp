@@ -11,7 +11,7 @@ int countPairs1(int *arr, int len, int value) {
     }
   }
   for ( int i = 0; i < len ; i++ ) {
-    for (int j = i + 1; j < len; j++ ) {
+    for ( int j = i + 1; j < len; j++ ) {
       int summ = arr[i] + arr[j];
       if (summ == value) {
         otvet += 1;
@@ -19,7 +19,6 @@ int countPairs1(int *arr, int len, int value) {
       summ = 0;
     }
   }
-  cout << otvet << endl;
   return otvet;
 }
 int countPairs2(int *arr, int len, int value) {
@@ -36,7 +35,7 @@ int countPairs2(int *arr, int len, int value) {
     }
   }
   int porog = (value - arr[0]);
-  for (o = 1; o < len; o++ ) {
+  for ( o = 1; o < len; o++ ) {
     if (arr[o] == porog) {
       break;
     }
@@ -49,11 +48,10 @@ int countPairs2(int *arr, int len, int value) {
       }
     }
   }
-  cout << otvet << endl;
   return otvet;
 }
 int cbinsearch(int *arr, int size, int value);
-int countPairs3(int *arr,int len,int value) {
+int countPairs3(int *arr, int len, int value) {
   int porog;
   int otvet = 0;
   for ( int i = 0; i < len; i++ ) {
@@ -71,13 +69,12 @@ int countPairs3(int *arr,int len,int value) {
     otvet += sch;
   }
   otvet = otvet / 2;
-  cout << otvet << endl;
   return otvet;
 }
 int cbinsearch(int *arr, int size, int value) {
   int irr[size];
   for ( int i = 0; i  < size; i++ ) {
-    irr[i]=arr[i];
+    irr[i] = arr[i];
   }
   bool cr;
   sch = 0;
@@ -88,7 +85,7 @@ int cbinsearch(int *arr, int size, int value) {
     while (start < last) {
       int pol = (last - start) / 2 + start;
       if (irr[pol] == value) {
-        for (int i = pol; i < size; i++ ) {
+        for ( int i = pol; i < size; i++ ) {
           irr[i] = irr[i + 1];
         }
         sch += 1;
