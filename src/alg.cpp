@@ -1,4 +1,5 @@
 // Copyright 2021 NNTU-CS
+int src;
 int countPairs1(int *arr, int len, int value) {
   int otvet;
   for ( int i = 0; i < len; i++) {
@@ -19,7 +20,6 @@ int countPairs1(int *arr, int len, int value) {
       summ = 0;
     }
   }
-  cout << otvet << endl;
   return otvet;
   return 0;
 }
@@ -50,7 +50,6 @@ int countPairs2(int *arr, int len, int value) {
       }
     }
   }
-  cout << otvet << endl;
   return otvet;
   return 0;
 }
@@ -73,7 +72,6 @@ int countPairs3(int *arr, int len, int value) {
     otvet += sch;
   }
   otvet = otvet / 2;
-  cout << otvet << endl;
   return otvet;
   return 0;
 }
