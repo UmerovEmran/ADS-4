@@ -1,6 +1,15 @@
 // Copyright 2021 NNTU-CS
 int countPairs1(int* arr, int len, int value) {
     int otvet = 0;
+    for ( int i = 0; i < len; i++ ) {
+        for ( int j = 0; j < len - i - 1; j++ ) {
+            if ( arr[j] > arr[j + 1] ) {
+                int per = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = per;
+            }
+       }
+    }    
     for (int i = 0; i < len; i++) {
         for (int j = i + 1; j < len; j++) {
             int summ = arr[i] + arr[j];
@@ -16,6 +25,15 @@ int countPairs2(int* arr, int len, int value) {
     int o;
     int gran;
     int otvet = 0;
+    for ( int i = 0; i < len; i++ ) {
+        for ( int j = 0; j < len - i - 1; j++ ) {
+            if ( arr[j] > arr[j + 1] ) {
+                int per = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = per;
+            }
+       }
+    }    
     int porog = (value - arr[0]);
     for (int i = 0; i < len; i++) {
     }
@@ -66,6 +84,15 @@ int cbinsearch(int* arr, int size, int porog, int adress) {
 int countPairs3(int* arr, int len, int value) {
     int porog;
     int otvet = 0;
+    for ( int i = 0; i < len; i++ ) {
+        for ( int j = 0; j < len - i - 1; j++ ) {
+            if ( arr[j] > arr[j + 1] ) {
+                int per = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = per;
+            }
+       }
+    }    
     int o = 0;
     int porog_2 = (value - arr[0]);
     for (o = 0; o < len; o++) {
