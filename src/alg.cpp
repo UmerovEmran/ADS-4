@@ -1,112 +1,93 @@
 // Copyright 2021 NNTU-CS
-int sch;
-int countPairs1(int *arr, int len, int value) {
-  int otvet;
-  for ( int i = 0; i < len; i++ ) {
-    for ( int j = 0; j < len - i - 1; j++ ) {
-      if ( arr[j] > arr[j + 1] ) {
-        int per = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = per;
-      }
-    }
-  }
-  for ( int i = 0; i < len ; i++ ) {
-    for ( int j = i + 1; j < len; j++ ) {
-      int summ = arr[i] + arr[j];
-      if (summ == value) {
-        otvet += 1;
-      }
-      summ = 0;
-    }
-  }
-  return otvet;
-}
-int countPairs2(int *arr, int len, int value) {
-  int o;
-  int gran;
-  int otvet;
-  for ( int i = 0; i < len; i++ ) {
-    for ( int j = 0; j < len - i - 1; j++ ) {
-      if ( arr[j] > arr[j + 1] ) {
-        int per = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = per;
-      }
-    }
-  }
-  int porog = (value - arr[0]);
-  for ( o = 1; o < len; o++ ) {
-    if (arr[o] == porog) {
-      break;
-    }
-  }
-  for ( int i = 0; i < len; i++ ) {
-    for ( int j = o; j > i; j-- ) {
-      int summ = arr[i] + arr[j];
-      if (summ == value) {
-        otvet += 1;
-      }
-    }
-  }
-  return otvet;
-}
-int cbinsearch(int *arr, int k, int value);
-int countPairs3(int *arr, int len, int value) {
-  int porog;
-  int otvet = 0;
-  for ( int i = 0; i < len; i++ ) {
-    for ( int j = 0; j < len - i - 1; j++ ) {
-      if ( arr[j] > arr[j + 1] ) {
-        int per = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = per;
-      }
-    }
-  }
-  for ( int i = 0; i < len; i++ ) {
-    int porog = value - arr[i];
-    cbinsearch(arr, len, porog);
-    otvet += sch;
-  }
-  otvet = otvet / 2;
-  return otvet;
-}
-int cbinsearch(int *arr, int k, int value) {
-  int irr[k];
-  for ( int i = 0; i  < k; i++ ) {
-    irr[i] = arr[i];
-  }
-  bool cr;
-  sch = 0;
-  while (true) {
-    int last = k - 1;
-    int start = 0;
-    cr = true;
-    while (start < last) {
-      int pol = (last - start) / 2 + start;
-      if (irr[pol] == value) {
-        for ( int i = pol; i < k; i++ ) {
-          irr[i] = irr[i + 1];
+void generateSorted(int* arr, int min, int max, int len) {
+    int value = 0, j = 0;
+    for (int i = 0; i < len; i++) {
+        value = min + rand() % (max - min + 1);
+        j = i - 1;
+        while (j >= 0 && arr[j] > value) {
+            arr[j + 1] = arr[j];
+            j--;
         }
-        sch += 1;
-        k -= 1;
-        cr = false;
-        break;
-      } else if (irr[pol] > value) {
-          last = pol;
-      } else {
-          start = pol;
-          start += 1;
-      }
+        arr[j + 1] = value;
     }
-    if (irr[start] == value && start == last) {
-      sch += 1;
+}
+int countPairs1(int* arr, int len, int value) {
+    int otvet = 0;
+    for (int i = 0; i < len; i++) {
+        for (int j = i + 1; j < len; j++) {
+            int summ = arr[i] + arr[j];
+            if (summ == value) {
+                otvet += 1;
+            }
+            summ = 0;
+        }
     }
-    if (cr) {
-      break;
+    return otvet;
+}
+int countPairs2(int* arr, int len, int value) {
+    int o;
+    int gran;
+    int otvet = 0;
+    int porog = (value - arr[0]);
+    for (int i = 0; i < len; i++) {
     }
-  }
-  return sch;
-  return 0;
+    for (o = 0; o < len; o++) {
+        if (arr[o] > porog) {
+            break;
+        }
+    }
+    for (int i = 0; i < o; i++) {
+        for (int j = o; j > i; j--) {
+            int summ = arr[i] + arr[j];
+            if (summ == value) {
+                otvet += 1;
+            }
+        }
+    }
+    return otvet;
+}
+
+int cbinsearch(int* arr, int size, int porog, int adress) {
+    int cnt = 0;
+    int i = adress;
+    int j = size;
+    while (i < j - 1) {
+        int mid = (i + j) / 2;
+        if (arr[mid] > porog) {
+            j = mid;
+        } else if (arr[mid] < porog) {
+            i = mid;
+        } else {
+            cnt += 1;
+            int temp = mid + 1;
+            while ((arr[temp] == porog) && (temp < j)) {
+                cnt += 1;
+                temp += 1;
+            }
+            temp = mid - 1;
+            while ((arr[temp] == porog) && (temp > i)) {
+                cnt += 1;
+                temp -= 1;
+            }
+            break;
+        }
+    }
+    return cnt;
+}
+
+int countPairs3(int* arr, int len, int value) {
+    int porog;
+    int otvet = 0;
+    int o = 0;
+    int porog_2 = (value - arr[0]);
+    for (o = 0; o < len; o++) {
+        if (arr[o] > porog_2) {
+            break;
+        }
+    }
+    for (int i = 0; i < o; i++) {
+        int porog = value - arr[i];
+        otvet += cbinsearch(arr, len, porog, i);
+    }
+    return otvet;
 }
