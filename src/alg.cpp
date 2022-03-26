@@ -1,16 +1,4 @@
 // Copyright 2021 NNTU-CS
-void generateSorted(int* arr, int min, int max, int len) {
-    int value = 0, j = 0;
-    for (int i = 0; i < len; i++) {
-        value = min + rand() % (max - min + 1);
-        j = i - 1;
-        while (j >= 0 && arr[j] > value) {
-            arr[j + 1] = arr[j];
-            j--;
-        }
-        arr[j + 1] = value;
-    }
-}
 int countPairs1(int* arr, int len, int value) {
     int otvet = 0;
     for (int i = 0; i < len; i++) {
